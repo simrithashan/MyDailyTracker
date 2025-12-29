@@ -14,6 +14,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+#ENV['NODE_BINARY'] = `which node`.strip
 target 'MyDailyTracker' do
   config = use_native_modules!
 
