@@ -15,8 +15,9 @@ import type {Theme} from 'react-native-otp-entry';
 import {login_Screen_Bg} from '../assets/images';
 import AuthCard from '../components/AuthCard';
 import LongButton from '../components/LongButton';
+import type {OTPAuthScreenProps} from '../navigation/AppNavigator';
 
-export default function OTPAuthScreen() {
+export default function OTPAuthScreen({navigation}: OTPAuthScreenProps) {
   const [otpValue, setOtpValue] = useState('');
   const isOtpComplete = otpValue.length === 6;
 
@@ -28,8 +29,12 @@ export default function OTPAuthScreen() {
   const handleSubmit = useCallback(() => {
     if (isOtpComplete) {
       console.log('Submitting OTP:', otpValue);
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'MainTabs'}],
+      });
     }
-  }, [isOtpComplete, otpValue]);
+  }, [isOtpComplete, navigation, otpValue]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
